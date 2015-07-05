@@ -58,6 +58,7 @@
 			
 		</style>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="/res/js.cookie.js"></script>
 		<script src="keystones.js"></script>
 		<script>
 			// Lists took on the Path Of Exile wiki (http://pathofexile.gamepedia.com/)
@@ -71,21 +72,44 @@
 				
 			$(document).ready(function() {
 				
-				$("#motivation").attr("src", "https://www.youtube.com/embed/nuHfVn_cfHU?autoplay=1");
+				var isShiaMuted = Cookies.get('is-shia-muted');
 				
-				/*var str = "[";
-				for (var i = 0; i < keystones.length; i++)
+				console.log(isShiaMuted);
+				
+				if (typeof isShiaMuted === "undefined" || isShiaMuted == false)
 				{
-					str += "{\"name\": \"" + keystones[i] + "\", \"description\": \"\"}";
-					if (i < keystones.length - 1)
-					{
-						str += ",";
-					}
+					
+					$("#motivation").attr("src", "https://www.youtube.com/embed/nuHfVn_cfHU?autoplay=1");
 				}
-				str += "]";
-				console.log(str);*/
+				else
+				{
+					$("#motivation").attr("src", "");
+				}
 				
+				if (isShiaMuted || typeof isShiaMuted !== "undefined")
+				{
+					$("#motivationDisclaimer").html("<a href=\"#\">Want shia back? Click here !</a>");
+				}
+				else
+				{
+					$("#motivationDisclaimer").html("<a href=\"#\">Don't want shia ? Click here !</a>");
+				}
 				
+				$("#motivationDisclaimer").on("click", function() {
+					if (isShiaMuted && isShiaMuted !== "undefined")
+					{
+						Cookies.remove('is-shia-muted');
+						$("#motivationDisclaimer").html("Saved ! Shia will welcome you back at your next visit !");
+					}
+					else
+					{
+						Cookies.set('is-shia-muted', true, { expires: 7 });
+						$("#motivation").attr("src", "");
+						$("#motivationDisclaimer").html("Saved ! Shia will no longer bother you unless you enable it back !");
+					}
+					
+				});		
+
 				if (window.location.href.indexOf("keystones") > -1 && window.location.href.indexOf("mainSkill") > -1)
 				{
 					decodeShareUrl();
@@ -210,7 +234,7 @@
 				for (var i = 0; i < decodedKeystones.length; i++)
 				{
 					//$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]["name"]) + "</li>");
-					$("#keystonesContainer").append("<div data-id=\"" + decodedKeystones[i] + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[decodedKeystones[i]]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div>");
+					$("#keystonesContainer").append("<td><center><div data-id=\"" + decodedKeystones[i] + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[decodedKeystones[i]]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div><br />" + urlIt(keystones[decodedKeystones[i]]["name"]) + "</center></td>");
 				}
 			}
 			
@@ -237,7 +261,7 @@
 					rolledNumbers.push(num);
 					//$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]["name"]) + "</li>");
 					
-					$("#keystonesContainer").append("<div data-id=\"" + num + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[num]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div>");
+					$("#keystonesContainer").append("<td><center><div data-id=\"" + num + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[num]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div><br />" + urlIt(keystones[num]["name"]) + "</center></td>");
 					
 				}
 				
@@ -278,7 +302,11 @@
 					<h3>Your randomized keystones :</h3><br />
 					<!--<ul id="list" style="min-height:75px;">
 					</ul>-->
-					<center><div id="keystonesContainer">
+					<center><div>
+						<table>
+							<tr id="keystonesContainer">
+							</tr>
+						</table>
 					</div></center>
 					<br />
 					<h3>Your randomized main spell :</h3><br />
@@ -290,11 +318,12 @@
 					<div id="saveContainer">
 					</div>
 					<br /><br />
-					<br /><br /><hr /><br /><br />
+					<br /><br /><hr /><span id="motivationDisclaimer"></span><br /><br />
+					
 					<span><strong>Content is available under CC BY-NC-SA 3.0 unless otherwise noted. Path of Exile content and materials are trademarks and copyrights of Grinding Gear Games or its licensors. All rights reserved.<br />Me nor Github are affiliated with Grinding Gear Games.</span>
 					<br />
 					
-					<iframe id="motivation" width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU?autoplay=1" frameborder="0" allowfullscreen hidden></iframe>
+					<iframe id="motivation" width="560" height="315" src="" frameborder="0" allowfullscreen hidden></iframe>
 				</div>
 			</div>
 		</div>
