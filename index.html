@@ -11,19 +11,60 @@
 			#mainContainer {
 				background: transparent !important;
 			}
+			
+			#keystoneTooltip {
+				width: 200px;
+				min-height:200px;
+				background-color: rgba(20,20,20,0.95);
+				border: 1px #141414 solid;
+				float: left;
+				position: absolute;
+			}
+			
+			#skillTooltip {
+				width: 200px;
+				min-height:200px;
+				background-color: rgba(20,20,20,0.95);
+				border: 1px #141414 solid;
+				float: left;
+				position: absolute;
+			}
+			
+			#keystoneName {
+				margin-left: 10px;
+			}
+			
+			#keystoneDesc {
+				margin-left: 10px;
+			}
+			
 		</style>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="keystones.js"></script>
 		<script>
 			// Lists took on the Path Of Exile wiki (http://pathofexile.gamepedia.com/)
-			var keystones = ["Acrobatics", "Ancestral Bond", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Conduit", 
+			/*var keystones = ["Acrobatics", "Ancestral Bond", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Conduit", 
 				"Eldritch Battery", "Elemental Equilibrium", "Ghost Reaver", "Iron Grip", "Iron Reflexes", "Mind Over Matter",
-				"Minion Instability", "Necromantic Aegis", "Ondar's Guile", "Pain Attunement", "Phase Acrobatics", "Point Blank", "Resolute Technique", "Unwavering Stance", "Vaal Pact", "Zealot's Oath"];
+				"Minion Instability", "Necromantic Aegis", "Ondar's Guile", "Pain Attunement", "Phase Acrobatics", "Point Blank", "Resolute Technique", "Unwavering Stance", "Vaal Pact", "Zealot's Oath"];*/
 				
 			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Immortal Call", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons"];
 				
 			var rolledNumbers = [];
 				
 			$(document).ready(function() {
+				
+				/*var str = "[";
+				for (var i = 0; i < keystones.length; i++)
+				{
+					str += "{\"name\": \"" + keystones[i] + "\", \"description\": \"\"}";
+					if (i < keystones.length - 1)
+					{
+						str += ",";
+					}
+				}
+				str += "]";
+				console.log(str);*/
+				
 				
 				if (window.location.href.indexOf("keystones") > -1 && window.location.href.indexOf("mainSkill") > -1)
 				{
@@ -43,7 +84,41 @@
 					$("#saveContainer").html("<br /><br /><span style=\"margin-top: 10px; background: rgb(0,0,0); padding:5px;\">" + urlBase + buildShareUrl() + "</span>");
 				});
 				
+				$("#list li a").on("mouseenter", function(e) {
+					$("#keystoneTooltip").css({
+						left: e.pageX + 20,
+						top: e.pageY
+					});
+					handleKeystoneTooltipDisplay(e);
+				});
+				
+				$("#list li a").on("mouseleave", function() {
+					$("#keystoneTooltip").hide();
+				});
+				
+				$("#mainSkill li a").on("mouseenter", function(e) {
+					$("#skillTooltip").css({
+						left: e.pageX + 20,
+						top: e.pageY
+					});
+					$("#skillTooltip").show();
+				});
+				
+				$("#mainSkill li a").on("mouseleave", function() {
+					$("#skillTooltip").hide();
+				});
+				
 			});
+			
+			function handleKeystoneTooltipDisplay(event)
+			{
+				var keystoneId = $(event.target).parent().attr('data-id');
+				$("#keystoneName").html(keystones[keystoneId]["name"]);
+				var desc = keystones[keystoneId]["description"];
+				desc = desc.replace("\n", "<br /><br />");
+				$("#keystoneDesc").html(desc);
+				$("#keystoneTooltip").show();
+			}
 				
 			function buildShareUrl()
 			{
@@ -113,7 +188,7 @@
 				$("#list").empty();
 				for (var i = 0; i < decodedKeystones.length; i++)
 				{
-					$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]) + "</li>");
+					$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]["name"]) + "</li>");
 				}
 			}
 			
@@ -138,7 +213,7 @@
 					} while (rolledNumbers.indexOf(num) > -1);
 					
 					rolledNumbers.push(num);
-					$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]) + "</li>");
+					$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]["name"]) + "</li>");
 				}
 				
 				// Randomizes the main skill
@@ -168,6 +243,9 @@
 			<div id="mainContainer">
 				<div class="layoutBoxContent">
 					<h1>Path Of Exile Roulette Build Generator</h1><br />
+					<h2>Short on build ideas? Looking for a new challenge? This website is made for you !</h2><br /><br />
+					<small>Keystones and gems descriptions are taken from the release version. It will be updated on The Awakening release !</small>
+					<hr />
 					<h3>Your randomized keystones :</h3><br />
 					<ul id="list" style="min-height:75px;">
 					</ul>
@@ -181,12 +259,20 @@
 					<div id="saveContainer">
 					</div>
 					<br /><br />
-					<span>Enjoy your new build in this magnificent new patch !</span>
-					<br /><br />
+					<br /><br /><hr /><br /><br />
 					<span><strong>Disclaimer ! I am in no way associated with Grinding Gear Games. This website is intended to be a fun way to generate a new random build to play with. All art and CSS assets here are belonging to <a href="http://www.grindinggear.com/">Grinding Gear Games</a>. </strong></span>
 					<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>-->
 				</div>
 			</div>
 		</div>
+		
+		<div id="keystoneTooltip" hidden>
+			<span><strong id="keystoneName"></strong></span><br /><hr /><br />
+			<p id="keystoneDesc"></p>
+		</div>
+		
+		<div id="skillTooltip" hidden>
+		</div>
+		
 	</body>
 </html>
