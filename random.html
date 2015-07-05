@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script>
+			var keystones = ["Acrobatics", "Ancestral Bond", "Avatar Of Fire", "Blood Magic", "Chaos Innoculation", "Conduit", 
+				"Eldrich Battery", "Elemental Equilibrium", "Ghost Reaver", "Iron Grip", "Iron Reflexes", "Mind Over Matter",
+				"Minion Instability", "Necromatic Aegis", "Ondar's Guile", "Pain Attunement", "Phase Acrobatics", "Point Blank", "Resolute Technique", "Unwavering Stance", "Vaal Pact", "Zealot Oath"];
+				
+				var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Immortal Call", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons"];
+				
+				var rolledNumbers = [];
+				
+				$(document).ready(function() {
+					randomizeBuild();
+					
+					$("#randomize").on("click", function() {
+						randomizeBuild();
+					});
+					
+				});
+				
+				
+				
+				function randomizeBuild()
+				{
+					$("#list").empty();
+					// Randomizes the keystone(s)
+					var keystonesCount = Math.floor((Math.random() * 3) + 2);
+					var num = -1;
+					for (var i = 0; i < keystonesCount; i++)
+					{
+						do {
+							num = Math.floor(Math.random() * keystones.length);
+						} while (rolledNumbers.indexOf(num) > -1);
+						
+						rolledNumbers.push(num);
+						$("#list").append("<li>" + keystones[num] + "</li>");
+					}
+					
+					// Randomizes the main skill
+					var randomizedSkillIndex = Math.floor(Math.random() * skills.length);
+					$("#mainSkill").html(skills[randomizedSkillIndex]);
+				}
+				
+		</script>
+	</head>
+	<body>
+		<h1>POE Roulette Build Generator</h1>
+		<h3>Your randomized keystones :</h3>
+		<ul id="list">
+		</ul>
+		<h1>
+		<h3>Your randomized main spell :</h3>
+		<span id="mainSkill"></span>
+		<br />
+		<button id="randomize" type="button">Randomize</button>
+		<br /><br />
+		<span>Enjoy !</span>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>
+		
+	</body>
+</html>
