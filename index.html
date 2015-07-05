@@ -131,7 +131,7 @@
 				
 				$("#save").on("click", function() {
 					var urlBase = location.href.substring(0, location.href.lastIndexOf("/")+1);
-					$("#saveContainer").html("<br /><br /><span style=\"margin-top: 10px; background: rgb(0,0,0); padding:5px;\">" + urlBase + buildShareUrl() + "</span>");
+					$("#saveContainer").html("<br /><br /><input style=\"background-color: #141414; min-width:350px; color:#A38D6D; padding:5px;\"type=\"text\" value=\"" + urlBase + buildShareUrl() + "\">");
 				});
 				
 				$("#keystonesContainer").delegate(".keystone-frame", "mouseenter", function(e) {
