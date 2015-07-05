@@ -72,7 +72,7 @@
 			
 			// Lel ( ͡° ͜ʖ ͡°)
 			
-			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons", "Magma Orb", "Wild Strike", "Frost Blade", "Flame Dash", "Ice Crash", "Lightning Warp", "Fire Nova Mine"];
+			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons", "Magma Orb", "Wild Strike", "Frost Blade", "Flame Dash", "Ice Crash", "Lightning Warp", "Fire Nova Mine", "Flame Dash"];
 				
 			var rolledNumbers = [];
 				
@@ -94,24 +94,24 @@
 				
 				if (isShiaMuted || typeof isShiaMuted !== "undefined")
 				{
-					$("#motivationDisclaimer").html("<a href=\"#\">Want shia back? Click here !</a>");
+					$("#motivationDisclaimer").html("<a href=\"#\">Want Shia back? Click here!</a>");
 				}
 				else
 				{
-					$("#motivationDisclaimer").html("<a href=\"#\">Don't want shia ? Click here !</a>");
+					$("#motivationDisclaimer").html("<a href=\"#\">Don't want Shia? Click here!</a>");
 				}
 				
 				$("#motivationDisclaimer").on("click", function() {
 					if (isShiaMuted && isShiaMuted !== "undefined")
 					{
 						Cookies.remove('is-shia-muted');
-						$("#motivationDisclaimer").html("Saved ! Shia will welcome you back at your next visit !");
+						$("#motivationDisclaimer").html("Saved! Shia will welcome you back at your next visit!");
 					}
 					else
 					{
 						Cookies.set('is-shia-muted', true, { expires: 7 });
 						$("#motivation").attr("src", "");
-						$("#motivationDisclaimer").html("Saved ! Shia will no longer bother you unless you enable it back !");
+						$("#motivationDisclaimer").html("Saved! Shia will no longer bother you unless you enable it back!");
 					}
 					
 				});
@@ -292,8 +292,7 @@
 			<div id="mainContainer">
 				<div class="layoutBoxContent">
 					<h1>Path Of Exile Roulette Build Generator</h1><br />
-					<h2>Short on build ideas? Looking for a new challenge? This website is made for you !</h2><br /><br />
-					<small>Keystones and gems descriptions are taken from the release version. It will be updated on The Awakening release !</small>
+					<h2>Short on build ideas? Looking for a new challenge? This website is made for you!</h2><br /><br />
 					<hr />
 					<h3>Your randomized keystones :</h3><br />
 					<!--<ul id="list" style="min-height:75px;">
@@ -310,7 +309,7 @@
 					</ul>
 					<br /><br /><br />
 					<a href="#" id="randomize" type="button" style="border:1px #FFF">Randomize again</a><br />
-					<a href="#" id="save" type="button" style="border:1px #FFF">Save this build !</a>
+					<a href="#" id="save" type="button" style="border:1px #FFF">Save this build!</a>
 					<div id="saveContainer">
 					</div>
 					<br /><br />
