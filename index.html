@@ -134,7 +134,7 @@
 					$("#saveContainer").html("<br /><br /><span style=\"margin-top: 10px; background: rgb(0,0,0); padding:5px;\">" + urlBase + buildShareUrl() + "</span>");
 				});
 				
-				$(".keystone-frame").on("mouseenter", function(e) {
+				$("#keystonesContainer").delegate(".keystone-frame", "mouseenter", function(e) {
 					$("#keystoneTooltip").css({
 						left: e.pageX + 20,
 						top: e.pageY
@@ -142,7 +142,7 @@
 					handleKeystoneTooltipDisplay(e);
 				});
 				
-				$(".keystone-frame").on("mouseleave", function() {
+				$("#keystonesContainer").delegate(".keystone-frame", "mouseleave", function() {
 					$("#keystoneTooltip").hide();
 				});
 
