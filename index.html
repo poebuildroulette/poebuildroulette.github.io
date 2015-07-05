@@ -3,9 +3,12 @@
 	<head>
 		<!-- I took the css of the main path of exile website, all credits and copyrights are belonging to Grinding Gear Games -->
 		<link href="/res/style.css" media="screen" rel="stylesheet" type="text/css">
+		<meta charset="utf-8">
 		<style>
 			.layoutBoxContent {
 				margin-top: 50px !important;
+				background-color: rgba(20,20,20,0.75);
+				padding: 10px;
 			}
 			
 			#mainContainer {
@@ -19,6 +22,7 @@
 				border: 1px #141414 solid;
 				float: left;
 				position: absolute;
+				padding-right:10px;
 			}
 			
 			#skillTooltip {
@@ -65,21 +69,23 @@
 			/*var keystones = ["Acrobatics", "Ancestral Bond", "Avatar of Fire", "Blood Magic", "Chaos Inoculation", "Conduit", 
 				"Eldritch Battery", "Elemental Equilibrium", "Ghost Reaver", "Iron Grip", "Iron Reflexes", "Mind Over Matter",
 				"Minion Instability", "Necromantic Aegis", "Ondar's Guile", "Pain Attunement", "Phase Acrobatics", "Point Blank", "Resolute Technique", "Unwavering Stance", "Vaal Pact", "Zealot's Oath"];*/
-				
-			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Immortal Call", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons"];
+			
+			// Lel ( ͡° ͜ʖ ͡°)
+			
+			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons", "Magma Orb", "Wild Strike", "Frost Blade", "Flame Dash", "Ice Crash", "Lightning Warp", "Fire Nova Mine"];
 				
 			var rolledNumbers = [];
 				
 			$(document).ready(function() {
 				
 				var isShiaMuted = Cookies.get('is-shia-muted');
-				
-				console.log(isShiaMuted);
-				
+	
 				if (typeof isShiaMuted === "undefined" || isShiaMuted == false)
 				{
-					
-					$("#motivation").attr("src", "https://www.youtube.com/embed/nuHfVn_cfHU?autoplay=1");
+					//document.getElementById("motivation").volume = 0.1;
+					var player = $("#motivation")[0];
+					player.volume = 0.15;
+					$("#motivation").attr("src", "res/doit.mp3");
 				}
 				else
 				{
@@ -108,8 +114,8 @@
 						$("#motivationDisclaimer").html("Saved ! Shia will no longer bother you unless you enable it back !");
 					}
 					
-				});		
-
+				});
+				
 				if (window.location.href.indexOf("keystones") > -1 && window.location.href.indexOf("mainSkill") > -1)
 				{
 					decodeShareUrl();
@@ -139,19 +145,7 @@
 				$(".keystone-frame").on("mouseleave", function() {
 					$("#keystoneTooltip").hide();
 				});
-				
-				/*$("#mainSkill li a").on("mouseenter", function(e) {
-					$("#skillTooltip").css({
-						left: e.pageX + 20,
-						top: e.pageY
-					});
-					$("#skillTooltip").show();
-				});
-				
-				$("#mainSkill li a").on("mouseleave", function() {
-					$("#skillTooltip").hide();
-				});*/
-				
+
 			});
 			
 			function handleKeystoneTooltipDisplay(event)
@@ -287,7 +281,7 @@
 			}
 			
 			function replaceAll(find, replace, str) {
-  				return str.replace(new RegExp(find, 'g'), replace);
+				return str.replace(new RegExp(find, 'g'), replace);
 			}
 			
 		</script>
@@ -311,7 +305,7 @@
 						</table>
 					</div></center>
 					<br />
-					<h3>Your randomized main spell :</h3><br />
+					<h3>Your randomized main skill :</h3><br />
 					<ul id="mainSkill">
 					</ul>
 					<br /><br /><br />
@@ -322,10 +316,10 @@
 					<br /><br />
 					<br /><br /><hr /><span id="motivationDisclaimer"></span><br /><br />
 					
-					<span><strong>Content is available under CC BY-NC-SA 3.0 unless otherwise noted. Path of Exile content and materials are trademarks and copyrights of Grinding Gear Games or its licensors. All rights reserved.<br />Me nor Github are affiliated with Grinding Gear Games.</span>
+					<span><strong>Content is available under CC BY-NC-SA 3.0 unless otherwise noted. Path of Exile content and materials are trademarks and copyrights of Grinding Gear Games or its licensors. All rights reserved. Images for Keystones are taken from the <a href="http://pathofexile.gamepedia.com/Path_of_Exile_Wiki" target="_blank">Path of Exile wiki</a><br />Neither us nor Github are affiliated with Grinding Gear Games.</span>
 					<br /><br />
-					<span><small>Made with love in Quebec City, Canada. By Dominic Boulanger, Alexandre Desbiens and Eric Poulin</small></span>
-					<iframe id="motivation" width="560" height="315" src="" frameborder="0" allowfullscreen hidden></iframe>
+					<span><small>Made with love in Quebec City, Canada. By Dominic Boulanger, Alexandre Desbiens, Jonathan Nadeau and Eric Poulin</small></span>
+					<audio id="motivation" autoplay src=""></audio>
 				</div>
 			</div>
 		</div>
@@ -334,9 +328,5 @@
 			<span><strong id="keystoneName"></strong></span><br /><hr /><br />
 			<p id="keystoneDesc"></p>
 		</div>
-		
-		<div id="skillTooltip" hidden>
-		</div>
-		
 	</body>
 </html>

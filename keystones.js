@@ -2,7 +2,7 @@ var keystones = [
 	{
 		"id": 0,
 		"name": "Acrobatics", 
-		"description": "30% Chance to Dodge Attacks\n50% less Armour and Energy Shield\n30% less Block chance"
+		"description": "30% Chance to Dodge Attacks\n50% less Armour and Energy Shield\n30% less chance to Block Spells and Attacks"
 	},
 	
 	{
@@ -86,7 +86,7 @@ var keystones = [
 	{
 		"id": 14,
 		"name": "Ondar's Guile", 
-		"description": "Doubles chance to Evade Projectile Attacks"
+		"description": "40% more chance to Evade Projectile Attacks\n20% less chance to Evade Melee Attacks"
 	},
 	
 	{
@@ -122,7 +122,7 @@ var keystones = [
 	{
 		"id": 20,
 		"name": "Vaal Pact", 
-		"description": "Life Leech applies instantly at 40% effectiveness\nLife Regeneration has no effect"
+		"description": "Life Leech applies instantly.\nLife Regeneration has no effect"
 	},
 	
 	{
