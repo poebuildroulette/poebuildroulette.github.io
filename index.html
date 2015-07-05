@@ -85,20 +85,20 @@
 					//document.getElementById("motivation").volume = 0.1;
 					var player = $("#motivation")[0];
 					player.volume = 0.15;
-					$("#motivation").attr("src", "res/doit.mp3");
+					//$("#motivation").attr("src", "res/doit.mp3");
 				}
 				else
 				{
-					$("#motivation").attr("src", "");
+					//$("#motivation").attr("src", "");
 				}
 				
 				if (isShiaMuted || typeof isShiaMuted !== "undefined")
 				{
-					$("#motivationDisclaimer").html("<a href=\"#\">Want Shia back? Click here!</a>");
+					//$("#motivationDisclaimer").html("<a href=\"#\">Want Shia back? Click here!</a>");
 				}
 				else
 				{
-					$("#motivationDisclaimer").html("<a href=\"#\">Don't want Shia? Click here!</a>");
+					//$("#motivationDisclaimer").html("<a href=\"#\">Don't want Shia? Click here!</a>");
 				}
 				
 				$("#motivationDisclaimer").on("click", function() {
@@ -314,12 +314,12 @@
 					<div id="saveContainer">
 					</div>
 					<br /><br />
-					<br /><br /><hr /><span id="motivationDisclaimer"></span><br /><br />
+					<br /><br /><hr /><!--<span id="motivationDisclaimer"></span>--><br /><br />
 					
 					<span><strong>Content is available under CC BY-NC-SA 3.0 unless otherwise noted. Path of Exile content and materials are trademarks and copyrights of Grinding Gear Games or its licensors. All rights reserved. Images for Keystones are taken from the <a href="http://pathofexile.gamepedia.com/Path_of_Exile_Wiki" target="_blank">Path of Exile wiki</a><br />Neither us nor Github are affiliated with Grinding Gear Games.</span>
 					<br /><br />
 					<span><small>Made with love in Quebec City, Canada. By Dominic Boulanger, Alexandre Desbiens, Jonathan Nadeau and Eric Poulin</small></span>
-					<audio id="motivation" autoplay src=""></audio>
+					<audio id="motivation" src=""></audio>
 				</div>
 			</div>
 		</div>
