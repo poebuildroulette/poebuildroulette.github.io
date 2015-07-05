@@ -1,63 +1,192 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- I took the css of the main path of exile website, all credits and copyrights are belonging to Grinding Gear Games -->
+		<link href="/res/style.css" media="screen" rel="stylesheet" type="text/css">
+		<style>
+			.layoutBoxContent {
+				margin-top: 50px !important;
+			}
+			
+			#mainContainer {
+				background: transparent !important;
+			}
+		</style>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script>
+			// Lists took on the Path Of Exile wiki (http://pathofexile.gamepedia.com/)
 			var keystones = ["Acrobatics", "Ancestral Bond", "Avatar Of Fire", "Blood Magic", "Chaos Innoculation", "Conduit", 
 				"Eldrich Battery", "Elemental Equilibrium", "Ghost Reaver", "Iron Grip", "Iron Reflexes", "Mind Over Matter",
 				"Minion Instability", "Necromatic Aegis", "Ondar's Guile", "Pain Attunement", "Phase Acrobatics", "Point Blank", "Resolute Technique", "Unwavering Stance", "Vaal Pact", "Zealot Oath"];
 				
-				var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Immortal Call", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons"];
+			var skills = ["Animate Guardian", "Cleave", "Dominating Blow", "Flame Totem", "Glacial Hammer", "Ground Slam", "Heavy Strike", "Immortal Call", "Infernal Blow", "Leap Slam", "Lightning Strike", "Molten Strike", "Searing Bond", "Shield Charge", "Shockwave Totem", "Static Strike", "Sweep", "Animate Weapon", "Barrage", "Bear Trap", "Burning Arrow", "Cyclone", "Desecrate", "Detonate Dead", "Double Strike", "Dual Strike", "Elemental Hit", "Etheral Knives", "Explosive Arrow", "Fire Trap", "Flicker Strike", "Freeze Mine", "Frenzy", "Ice Shot", "Lightning Arrow", "Poison Arrow", "Puncture", "Rain of Arrows", "Reave", "Spectral Throw", "Split Arrow", "Tornado Shot", "Viper Strike", "Whirling Blades", "Arc", "Ball Lightning", "Cold Snap", "Conversion Trap", "Discharge", "Fireball", "Firestorm", "Flame Surge", "Flameblast", "Freezing Pulse", "Frost Wall", "Glacial Cascade", "Ice Nova", "Ice Spear", "Incinerate", "Kinetic Blast", "Lightning Tendrils", "Lightning Warp", "Power Siphon", "Raise Spectre", "Raise Zombie", "Righteous Fire", "Shock Nova", "Spark", "Storm Call", "Summon Ragin Spirit", "Summon Skeletons"];
 				
-				var rolledNumbers = [];
+			var rolledNumbers = [];
 				
-				$(document).ready(function() {
-					randomizeBuild();
-					
-					$("#randomize").on("click", function() {
-						randomizeBuild();
-					});
-					
-				});
+			$(document).ready(function() {
 				
-				
-				
-				function randomizeBuild()
+				if (window.location.href.indexOf("keystones") > -1 && window.location.href.indexOf("mainSkill") > -1)
 				{
-					$("#list").empty();
-					// Randomizes the keystone(s)
-					var keystonesCount = Math.floor((Math.random() * 3) + 2);
-					var num = -1;
-					for (var i = 0; i < keystonesCount; i++)
-					{
-						do {
-							num = Math.floor(Math.random() * keystones.length);
-						} while (rolledNumbers.indexOf(num) > -1);
-						
-						rolledNumbers.push(num);
-						$("#list").append("<li>" + keystones[num] + "</li>");
-					}
-					
-					// Randomizes the main skill
-					var randomizedSkillIndex = Math.floor(Math.random() * skills.length);
-					$("#mainSkill").html(skills[randomizedSkillIndex]);
+					decodeShareUrl();
+				}
+				else
+				{
+					randomizeBuild();
 				}
 				
+				$("#randomize").on("click", function() {
+					randomizeBuild();
+				});
+				
+				$("#save").on("click", function() {
+					urlBase = location.href.substring(0, location.href.lastIndexOf("/")+1);
+					$("#saveContainer").html("<br /><br /><span style=\"margin-top: 10px; background: rgb(0,0,0); padding:5px;\">" + urlBase + "random.html" + buildShareUrl() + "</span>");
+				});
+				
+			});
+				
+			function buildShareUrl()
+			{
+				var url = "";
+				var currentKeystones = $("#list").find("li");
+				var mainSkill = $("#mainSkill").find("li");
+				
+				var url = "?keystones="
+				for (var i = 0; i < currentKeystones.length; i++)
+				{
+					url += $(currentKeystones[i]).attr('data-id');
+					if (i < currentKeystones.length - 1)
+					{
+						url += ";";
+					}
+				}
+				url += "&mainSkill=";
+				
+				for (var j = 0; j < mainSkill.length; j++)
+				{
+					url += $(mainSkill[j]).attr('data-id');
+					if (j < mainSkill.length - 1)
+					{
+						url += ";";
+					}
+				}
+				
+				return url;
+				
+			}
+			
+			function decodeShareUrl(url)
+			{
+				var params = [];
+				
+				var query = window.location.search.substring(1);
+				var variables = query.split("&");
+				
+				for (var i = 0; i < variables.length; i++)
+				{
+					var value = variables[i].split("=")[1];
+					var key = variables[i].split("=")[0];
+					params.push({"key": key, "value": value});
+				}
+				
+				for (var i = 0; i < params.length; i++)
+				{
+					switch (params[i].key)
+					{
+						case "keystones":
+							decodeKeystones(params[i].value);
+							break;
+						case "mainSkill":
+							decodeMainSkill(params[i].value);
+							break;
+						default:
+							break;
+					}
+				}
+				
+			}
+			
+			function decodeKeystones(keystonesRaw)
+			{
+				var decodedKeystones = keystonesRaw.split(";");
+				
+				$("#list").empty();
+				for (var i = 0; i < decodedKeystones.length; i++)
+				{
+					$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]) + "</li>");
+				}
+			}
+			
+			function decodeMainSkill(mainSkillRaw)
+			{
+				$("#mainSkill").empty();
+				
+				$("#mainSkill").html("<li data-id=\"" + mainSkillRaw + "\">" + urlIt(skills[mainSkillRaw]) + "</li>");
+			}
+			
+			
+			function randomizeBuild()
+			{
+				$("#list").empty();
+				// Randomizes the keystone(s)
+				var keystonesCount = Math.floor((Math.random() * 3) + 2);
+				var num = -1;
+				for (var i = 0; i < keystonesCount; i++)
+				{
+					do {
+						num = Math.floor(Math.random() * keystones.length);
+					} while (rolledNumbers.indexOf(num) > -1);
+					
+					rolledNumbers.push(num);
+					$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]) + "</li>");
+				}
+				
+				// Randomizes the main skill
+				var randomizedSkillIndex = Math.floor(Math.random() * skills.length);
+				$("#mainSkill").html("<li data-id=\"" + randomizedSkillIndex + "\">" + urlIt(skills[randomizedSkillIndex]) + "</li>");
+			}
+			
+			/*
+			 *
+			 */
+			function urlReplace(input)
+			{
+				return input.replace(" ", "_");
+			}
+			
+			function urlIt(input)
+			{
+				var urlInput = urlReplace(input);
+				return "<a href=\"http://pathofexile.gamepedia.com/" + urlInput + "\" target=\"_blank\">" + input + "</a></li>";
+			}
+			
 		</script>
 	</head>
 	<body>
-		<h1>POE Roulette Build Generator</h1>
-		<h3>Your randomized keystones :</h3>
-		<ul id="list">
-		</ul>
-		<h1>
-		<h3>Your randomized main spell :</h3>
-		<span id="mainSkill"></span>
-		<br />
-		<button id="randomize" type="button">Randomize</button>
-		<br /><br />
-		<span>Enjoy !</span>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>
-		
+		<!--<div id="wrapper">-->
+		<div id="siteCentered">
+			<div id="mainContainer">
+				<div class="layoutBoxContent">
+					<h1>Path Of Exile Roulette Build Generator</h1><br />
+					<h3>Your randomized keystones :</h3><br />
+					<ul id="list" style="min-height:75px;">
+					</ul>
+					<br />
+					<h3>Your randomized main spell :</h3><br />
+					<ul id="mainSkill">
+					</ul>
+					<br /><br /><br />
+					<a href="#" id="randomize" type="button" style="border:1px #FFF">Randomize again</a><br />
+					<a href="#" id="save" type="button" style="border:1px #FFF">Save this build !</a>
+					<div id="saveContainer">
+					</div>
+					<br /><br />
+					<span>Enjoy your new build in this magnificent new patch !</span>
+					<br /><br />
+					<span><strong>Disclaimer ! I am in no way associated with Grinding Gear Games. This website is intended to be a fun way to generate a new random build to play with. All art and CSS assets here are belonging to <a href="http://www.grindinggear.com/">Grinding Gear Games</a>. </strong></span>
+					<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>-->
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
