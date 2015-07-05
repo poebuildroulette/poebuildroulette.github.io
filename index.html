@@ -38,6 +38,24 @@
 				margin-left: 10px;
 			}
 			
+			.keystone {
+				width: 184;
+				height: 184;
+				/*background-color: black;*/
+				position: relative;
+				display: inline-block;
+				margin: 5px;
+			}
+			.keystone-image {
+				position: absolute;
+				left: 28px;
+				top: 28px;
+			}
+			.keystone-frame {
+				position: relative;
+				z-index: 1;
+			}
+			
 		</style>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="keystones.js"></script>
@@ -84,7 +102,7 @@
 					$("#saveContainer").html("<br /><br /><span style=\"margin-top: 10px; background: rgb(0,0,0); padding:5px;\">" + urlBase + buildShareUrl() + "</span>");
 				});
 				
-				$("#list li a").on("mouseenter", function(e) {
+				$(".keystone-frame").on("mouseenter", function(e) {
 					$("#keystoneTooltip").css({
 						left: e.pageX + 20,
 						top: e.pageY
@@ -92,11 +110,11 @@
 					handleKeystoneTooltipDisplay(e);
 				});
 				
-				$("#list li a").on("mouseleave", function() {
+				$(".keystone-frame").on("mouseleave", function() {
 					$("#keystoneTooltip").hide();
 				});
 				
-				$("#mainSkill li a").on("mouseenter", function(e) {
+				/*$("#mainSkill li a").on("mouseenter", function(e) {
 					$("#skillTooltip").css({
 						left: e.pageX + 20,
 						top: e.pageY
@@ -106,7 +124,7 @@
 				
 				$("#mainSkill li a").on("mouseleave", function() {
 					$("#skillTooltip").hide();
-				});
+				});*/
 				
 			});
 			
@@ -115,7 +133,7 @@
 				var keystoneId = $(event.target).parent().attr('data-id');
 				$("#keystoneName").html(keystones[keystoneId]["name"]);
 				var desc = keystones[keystoneId]["description"];
-				desc = desc.replace("\n", "<br /><br />");
+				desc = replaceAll("\n", "<br /><br />", desc);
 				$("#keystoneDesc").html(desc);
 				$("#keystoneTooltip").show();
 			}
@@ -123,7 +141,7 @@
 			function buildShareUrl()
 			{
 				var url = "";
-				var currentKeystones = $("#list").find("li");
+				var currentKeystones = $("#keystonesContainer").find("div");
 				var mainSkill = $("#mainSkill").find("li");
 				
 				var url = "?keystones="
@@ -185,10 +203,12 @@
 			{
 				var decodedKeystones = keystonesRaw.split(";");
 				
-				$("#list").empty();
+				//$("#list").empty();
+				$("#keystonesContainer").empty();
 				for (var i = 0; i < decodedKeystones.length; i++)
 				{
-					$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]["name"]) + "</li>");
+					//$("#list").append("<li data-id=\"" + decodedKeystones[i] + "\">" + urlIt(keystones[decodedKeystones[i]]["name"]) + "</li>");
+					$("#keystonesContainer").append("<div data-id=\"" + decodedKeystones[i] + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[decodedKeystones[i]]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div>");
 				}
 			}
 			
@@ -213,7 +233,10 @@
 					} while (rolledNumbers.indexOf(num) > -1);
 					
 					rolledNumbers.push(num);
-					$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]["name"]) + "</li>");
+					//$("#list").append("<li data-id=\"" + num + "\">" + urlIt(keystones[num]["name"]) + "</li>");
+					
+					$("#keystonesContainer").append("<div data-id=\"" + num + "\" class=\"keystone\"><img class=\"keystone-image\" src=\"res/img/" + urlReplace(keystones[num]["name"]) + ".png\" /><img class=\"keystone-frame\" src=\"res/img/Keystone_Frame.png\" /></div>");
+					
 				}
 				
 				// Randomizes the main skill
@@ -226,13 +249,17 @@
 			 */
 			function urlReplace(input)
 			{
-				return input.replace(" ", "_");
+				return replaceAll(" ", "_", input);
 			}
 			
 			function urlIt(input)
 			{
 				var urlInput = urlReplace(input);
 				return "<a href=\"http://pathofexile.gamepedia.com/" + urlInput + "\" target=\"_blank\">" + input + "</a></li>";
+			}
+			
+			function replaceAll(find, replace, str) {
+  				return str.replace(new RegExp(find, 'g'), replace);
 			}
 			
 		</script>
@@ -247,8 +274,10 @@
 					<small>Keystones and gems descriptions are taken from the release version. It will be updated on The Awakening release !</small>
 					<hr />
 					<h3>Your randomized keystones :</h3><br />
-					<ul id="list" style="min-height:75px;">
-					</ul>
+					<!--<ul id="list" style="min-height:75px;">
+					</ul>-->
+					<center><div id="keystonesContainer">
+					</div></center>
 					<br />
 					<h3>Your randomized main spell :</h3><br />
 					<ul id="mainSkill">
@@ -260,8 +289,10 @@
 					</div>
 					<br /><br />
 					<br /><br /><hr /><br /><br />
-					<span><strong>Disclaimer ! I am in no way associated with Grinding Gear Games. This website is intended to be a fun way to generate a new random build to play with. All art and CSS assets here are belonging to <a href="http://www.grindinggear.com/">Grinding Gear Games</a>. </strong></span>
-					<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>-->
+					<span><strong>Content is available under CC BY-NC-SA 3.0 unless otherwise noted. Path of Exile content and materials are trademarks and copyrights of Grinding Gear Games or its licensors. All rights reserved.<br />Me nor Github are affiliated with Grinding Gear Games.</span>
+					<br />
+					
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/nuHfVn_cfHU" frameborder="0" allowfullscreen hidden></iframe>
 				</div>
 			</div>
 		</div>
