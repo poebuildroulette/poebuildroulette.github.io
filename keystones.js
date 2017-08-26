@@ -2,25 +2,25 @@ var keystones = [
 	{
 		"id": 0,
 		"name": "Acrobatics", 
-		"description": "30% Chance to Dodge Attacks\n50% less Armour and Energy Shield\n30% less chance to Block Spells and Attacks"
+		"description": "30% Chance to Dodge Attacks.\n50% less Armour and Energy Shield, 30% less Chance to Block Spells and Attacks"
 	},
 	
 	{
 		"id": 1,
 		"name": "Ancestral Bond", 
-		"description": "Can summon up to 1 additional totem\nYou can't deal Damage with your Skills yourself"
+		"description": "Can have up to 1 additional Totem summoned at a time\nYou can't deal Damage with your Skills yourself"
 	},
 	
 	{
 		"id": 2,
 		"name": "Avatar of Fire",
-	    "description": "50% of Physical Damage Converted to Fire Damage\n50% of Lightning Damage Converted to Fire Damage\n50% of Cold Damage Converted to Fire Damage\nDeal no Non-Fire Damage"
+	    "description": "50% of Physical, Cold and Lightning Damage Converted to Fire Damage\nDeal no Non-Fire Damage"
 	},
 	
 	{
 		"id": 3,
 		"name": "Blood Magic", 
-		"description": "Removes all mana\nSpend Life instead of Mana for Skills"
+		"description": "Removes all mana.\nSpend Life instead of Mana for Skills"
 	},
 	
 	{
@@ -38,19 +38,19 @@ var keystones = [
 	{
 		"id": 6,
 		"name": "Eldritch Battery", 
-		"description": "Converts all Energy Shield to Mana"
+		"description": "Energy Shield protects Mana instead of Life\nSpend Energy Shield before Mana for Skill Costs"
 	},
 	
 	{
 		"id": 7,
 		"name": "Elemental Equilibrium", 
-		"description": "Enemies you hit with Elemental Damage temporarily get +25% Resistances to those Elements and −50% Resistances to other Elements"
+		"description": "Enemies you hit with Elemental Damage temporarily get +25% Resistance to those Elements and -50% Resistance to other Elements"
 	},
 	
 	{
 		"id": 8,
 		"name": "Ghost Reaver", 
-		"description": "Life Leech applies to Energy Shield instead of Life"
+		"description": "Life Leech is applied to Energy Shield instead\n50% less Energy Shield Recharge Rate"
 	},
 	
 	{
@@ -62,13 +62,13 @@ var keystones = [
 	{
 		"id": 10,
 		"name": "Iron Reflexes", 
-		"description": "Converts all Evasion Rating to Armour\nDexterity provides no bonus to Evasion Rating"
+		"description": "Converts all Evasion Rating to Armour.\nDexterity provides no bonus to Evasion Rating"
 	},
 	
 	{
 		"id": 11,
 		"name": "Mind Over Matter",
-		 "description": "When Hit, 30% of Damage is taken from Mana before Life"
+		 "description": "30% of Damage is taken from Mana before Life"
 	},
 	
 	{
@@ -85,49 +85,67 @@ var keystones = [
 	
 	{
 		"id": 14,
-		"name": "Ondar's Guile", 
-		"description": "40% more chance to Evade Projectile Attacks\n20% less chance to Evade Melee Attacks"
-	},
-	
-	{
-		"id": 15,
 		"name": "Pain Attunement", 
 		"description": "30% more Spell Damage when on Low Life"
 	},
 	
 	{
-		"id": 16,
+		"id": 15,
 		"name": "Phase Acrobatics", 
 		"description": "30% Chance to Dodge Spell Damage"
 	},
 	
 	{
-		"id": 17,
+		"id": 16,
 		"name": "Point Blank", 
-		"description": "Projectile Attacks deal up to 50% more Damage to targets at the start of their movement, dealing less Damage to targets as the projectile travels further"
+		"description": "Projectile Attacks deal up to 50% more Damage to targets at the start of their movement, dealing less Damage to targets as the projectile travels farther"
 	},
 	
 	{
-		"id": 18,
+		"id": 17,
 		"name": "Resolute Technique", 
 		"description": "Your hits can't be Evaded\nNever deal Critical Strikes"
 	},
 	
 	{
-		"id": 19,
+		"id": 18,
 		"name": "Unwavering Stance", 
 		"description": "Cannot Evade enemy Attacks\nCannot be Stunned"
 	},
 	
 	{
-		"id": 20,
+		"id": 19,
 		"name": "Vaal Pact", 
-		"description": "Life Leech applies instantly.\nLife Regeneration has no effect"
+		"description": "Gain Life from Leech instantly.\nLife Regeneration has no effect"
 	},
 	
 	{
-		"id": 21,
+		"id": 20,
 		"name": "Zealot's Oath", 
 		"description": "Life Regeneration applies to Energy Shield instead of Life"
+	},
+
+	{
+		"id": 21,
+		"name": "Arrow Dancing",
+		"description": "40% more chance to Evade Projectile Attacks\n20% less chance to Evade Melee Attacks"
+	},
+
+	{
+		"id": 22,
+		"name": "Crimson Dance",
+		"description": "You can inflict Bleeding on an Enemy up to 8 times\nYour Bleeding does not deal extra Damage while the Enemy is moving\n50% less Damage with Bleeding"
+	},
+
+	{
+		"id": 23,
+		"name": "Elemental Overload",
+		"description": "40% more Elemental Damage if you've Crit in the past 8 seconds\nNo Critical Strike Multiplier"
+	},
+
+	{
+		"id": 24,
+		"name": "Perfect Agony",
+		"description": "Modifiers to Critical Strike Multiplier also apply to Damage Multiplier for Ailments from Critical Strike at 30% of their value\n30% less Damage with Hits"
 	}
 ];
