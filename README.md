@@ -1,5 +1,5 @@
 # PoE Build Roulette
-A Random Roulette to decide your next Path of Exile : The Awakening Build
+A Random Roulette to decide your next Path of Exile : Fall of Oriath build
 
 ## Disclaimer
 I do not own any art assets present in this website, all art assets, including the css, belongs to Grinding Gear Game. No copyright infringement was intended. If requested, I will remove all arts related to Grinding Gear Games and may even possibly end the website.
